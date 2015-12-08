@@ -1,0 +1,15 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "First Node application",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/myers3cr/test"
+  },
+  "author": "C.R. Myers",
+  "dependencies": {
+    "express": "^4.8.8"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "node-api",
+  "version": "1.0.0",
+  "description": "API for CRM application",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/myers3cr/node-api"
+  },
+  "author": "C.R. Myers",
+  "dependencies": {
+    "morgan": "~1.5.0",
+    "express": "^4.10.3",
+    "body-parser": "~1.9.3",
+    "mongoose": "~3.8.19",
+    "bcrypt-nodejs": "0.0.3"
+  },
+  "license": "MIT"
+}
