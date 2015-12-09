@@ -52,8 +52,7 @@ apiRouter.get('/', function(req, res) {
   res.json({ message: 'Welcome to our API!' });
 });
 
-// More API routes go here
-
+// Routes for /api/users
 apiRouter.route('/users')
   //create a user with a POST
   .post(function(req, res) {
@@ -75,6 +74,49 @@ apiRouter.route('/users')
       res.json( {message: 'User created.'});
     });
   })
+  .get(function(req, res) {
+    User.find(function(err, users) {
+      if(err) res.send(err);
+      // return the users
+      res.json(users);
+    });
+  });
+
+// Add routes for /api/users/:user_id
+apiRouter.route('/users/:user_id')
+  // Get a single user by user_id
+  .get(function(req, res) {
+    User.findById(req.params.user_id, function(err, user) {
+      if(err) res.send(err);
+      // return requested user
+      res.json(user);
+    });
+  })
+  // Update the user's information
+  .put(function(req, res) {
+    // Get the requested user
+    User.findById(req.params.user_id, function(err, user) {
+      if(err) res.send(err);
+      // Update the user with the data passed in
+      if(req.body.name) user.name = req.body.name;
+      if(req.body.username) user.username = req.body.username;
+      if(req.body.password) user.password = req.body.password;
+      // Save the user
+      user.save(function(err) {
+        if(err) res.send(err);
+        // Success, return message
+        res.json( {message: 'User updated.'} );
+      });
+    });
+  })
+  // Delete the user
+  .delete(function(req, res) {
+    User.remove({ _id: req.params.user_id}, function(err, user) {
+      if(err) return res.send(err);
+      // Success
+      res.json( {message: 'Successfully deleted.'} );
+    });
+  });
 
 // Register the routes
 app.use('/api', apiRouter);
